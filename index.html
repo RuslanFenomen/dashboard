@@ -1,32 +1,30 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Дашборд</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
     :root {
-      --obs-bg: #0d0d0d;
-      --obs-surface: #141414;
-      --obs-surface2: #1a1a1a;
-      --obs-surface3: #222222;
-      --obs-border: rgba(255, 255, 255, 0.07);
-      --obs-border2: rgba(255, 255, 255, 0.12);
-      --obs-purple: #7c6bea;
-      --obs-purple-dim: rgba(124, 107, 234, 0.15);
-      --obs-purple-glow: rgba(124, 107, 234, 0.08);
-      --obs-text: #e8e6f0;
-      --obs-muted: #8b8a96;
-      --obs-hint: #4a4857;
-      --obs-green: #4caf87;
-      --obs-amber: #d4a030;
-      --obs-red: #c46a5a;
-      --obs-teal: #4db6ac;
+      --bg: #0d0d0d;
+      --s1: #141414;
+      --s2: #1a1a1a;
+      --s3: #222;
+      --brd: rgba(255, 255, 255, 0.07);
+      --brd2: rgba(255, 255, 255, 0.12);
+      --p: #7c6bea;
+      --pd: rgba(124, 107, 234, 0.15);
+      --pg: rgba(124, 107, 234, 0.08);
+      --tx: #e8e6f0;
+      --mt: #8b8a96;
+      --ht: #4a4857;
+      --gn: #4caf87;
+      --am: #d4a030;
+      --rd: #c46a5a;
+      --tl: #4db6ac;
       --r: 6px;
-      --r-lg: 10px;
+      --rl: 10px;
     }
 
     * {
@@ -36,26 +34,26 @@
     }
 
     body {
-      zoom: 1.2;
-      background: var(--obs-bg);
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--tx);
     }
 
     .app {
-      min-height: 600px;
-      font-family: 'Inter', sans-serif;
-      color: var(--obs-text);
-      padding: 0;
+      border-radius: var(--rl);
       overflow: hidden;
+      min-height: 580px;
     }
 
+    /* TOPBAR */
     .topbar {
-      background: var(--obs-surface);
-      border-bottom: 1px solid var(--obs-border);
+      background: var(--s1);
+      border-bottom: 1px solid var(--brd);
       padding: 0 1.25rem;
       display: flex;
       align-items: center;
-      gap: 0;
       height: 44px;
+      gap: 0;
     }
 
     .logo {
@@ -65,21 +63,14 @@
       margin-right: 1.5rem;
     }
 
-    .logo-gem {
-      width: 20px;
-      height: 20px;
-    }
-
     .logo-name {
       font-size: 13px;
       font-weight: 600;
-      color: var(--obs-text);
-      letter-spacing: 0.02em;
+      letter-spacing: .02em;
     }
 
     .tabs {
       display: flex;
-      align-items: center;
       height: 100%;
       gap: 0;
       flex: 1;
@@ -92,9 +83,9 @@
       cursor: pointer;
       border: none;
       background: none;
-      color: var(--obs-muted);
+      color: var(--mt);
       border-bottom: 2px solid transparent;
-      transition: all 0.15s;
+      transition: all .15s;
       font-family: 'Inter', sans-serif;
       display: flex;
       align-items: center;
@@ -103,18 +94,15 @@
     }
 
     .tab:hover {
-      color: var(--obs-text);
+      color: var(--tx);
     }
 
     .tab.active {
-      color: var(--obs-purple);
-      border-bottom-color: var(--obs-purple);
+      color: var(--p);
+      border-bottom-color: var(--p);
     }
 
-    .tab-icon {
-      font-size: 13px;
-    }
-
+    /* PANELS */
     .panel {
       display: none;
       padding: 1.25rem;
@@ -124,6 +112,7 @@
       display: block;
     }
 
+    /* STATS */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -132,8 +121,8 @@
     }
 
     .stat-card {
-      background: var(--obs-surface);
-      border: 1px solid var(--obs-border);
+      background: var(--s1);
+      border: 1px solid var(--brd);
       border-radius: var(--r);
       padding: 14px 16px;
       position: relative;
@@ -147,14 +136,14 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: var(--obs-purple);
-      opacity: 0.5;
+      background: var(--p);
+      opacity: .5;
     }
 
     .stat-label {
       font-size: 11px;
-      color: var(--obs-muted);
-      letter-spacing: 0.08em;
+      color: var(--mt);
+      letter-spacing: .08em;
       text-transform: uppercase;
       font-weight: 500;
       margin-bottom: 6px;
@@ -164,11 +153,32 @@
     .stat-value {
       font-size: 26px;
       font-weight: 300;
-      color: var(--obs-text);
+      color: var(--tx);
       font-family: 'JetBrains Mono', monospace;
       letter-spacing: -1px;
     }
 
+    /* SECTION HEADER */
+    .sec-hdr {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--ht);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sec-hdr::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--brd);
+    }
+
+    /* GOAL CARD */
     .goals-list {
       display: flex;
       flex-direction: column;
@@ -176,17 +186,16 @@
     }
 
     .goal-card {
-      background: var(--obs-surface);
-      border: 1px solid var(--obs-border);
-      border-radius: var(--r-lg);
+      background: var(--s1);
+      border: 1px solid var(--brd);
+      border-radius: var(--rl);
       padding: 14px 16px;
-      transition: border-color 0.15s, background 0.15s;
-      cursor: default;
+      transition: border-color .15s, background .15s;
     }
 
     .goal-card:hover {
-      border-color: var(--obs-border2);
-      background: var(--obs-surface2);
+      border-color: var(--brd2);
+      background: var(--s2);
     }
 
     .goal-top {
@@ -200,13 +209,12 @@
       width: 30px;
       height: 30px;
       border-radius: 6px;
-      background: var(--obs-purple-dim);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 14px;
       flex-shrink: 0;
-      border: 1px solid rgba(124, 107, 234, 0.2);
+      border: 1px solid;
     }
 
     .goal-body {
@@ -217,14 +225,13 @@
     .goal-title {
       font-size: 14px;
       font-weight: 500;
-      color: var(--obs-text);
+      color: var(--tx);
       margin-bottom: 3px;
-      line-height: 1.3;
     }
 
     .goal-desc {
       font-size: 12px;
-      color: var(--obs-muted);
+      color: var(--mt);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -243,17 +250,53 @@
       font-family: 'JetBrains Mono', monospace;
       padding: 2px 8px;
       border-radius: 4px;
-      color: var(--obs-purple);
-      background: var(--obs-purple-dim);
-      border: 1px solid rgba(124, 107, 234, 0.2);
+      color: var(--p);
+      background: var(--pd);
+      border: 1px solid rgba(124, 107, 234, .2);
     }
 
     .tag-date {
       font-size: 11px;
       font-family: 'JetBrains Mono', monospace;
-      color: var(--obs-hint);
+      color: var(--ht);
     }
 
+    /* METRICS ROW */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .metric-box {
+      background: var(--s2);
+      border: 1px solid var(--brd);
+      border-radius: var(--r);
+      padding: 8px 10px;
+    }
+
+    .metric-label {
+      font-size: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--ht);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .metric-val {
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--tx);
+    }
+
+    .metric-val.pct-val {
+      color: var(--p);
+    }
+
+    /* PROGRESS */
     .progress-row {
       display: flex;
       align-items: center;
@@ -263,7 +306,7 @@
     .progress-track {
       flex: 1;
       height: 3px;
-      background: var(--obs-surface3);
+      background: var(--s3);
       border-radius: 2px;
       overflow: hidden;
     }
@@ -271,77 +314,135 @@
     .progress-fill {
       height: 100%;
       border-radius: 2px;
-      transition: width 0.4s cubic-bezier(.4, 0, .2, 1);
+      transition: width .4s cubic-bezier(.4, 0, .2, 1);
     }
 
     .progress-pct {
       font-size: 11px;
       font-family: 'JetBrains Mono', monospace;
-      color: var(--obs-muted);
+      color: var(--mt);
       min-width: 30px;
       text-align: right;
     }
 
+    /* DONE INLINE INPUT */
+    .done-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--brd);
+    }
+
+    .done-label {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--mt);
+      white-space: nowrap;
+    }
+
+    .done-input {
+      background: var(--s2);
+      border: 1px solid var(--brd2);
+      border-radius: var(--r);
+      color: var(--tx);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      padding: 5px 8px;
+      width: 90px;
+      outline: none;
+    }
+
+    .done-input:focus {
+      border-color: var(--p);
+    }
+
+    .btn-apply {
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-family: 'Inter', sans-serif;
+      border: 1px solid var(--p);
+      border-radius: var(--r);
+      background: var(--pd);
+      cursor: pointer;
+      color: var(--p);
+      transition: all .15s;
+    }
+
+    .btn-apply:hover {
+      background: var(--p);
+      color: #fff;
+    }
+
+    /* GOAL FOOTER */
     .goal-footer {
       display: flex;
       gap: 6px;
       margin-top: 10px;
       padding-top: 10px;
-      border-top: 1px solid var(--obs-border);
+      border-top: 1px solid var(--brd);
     }
 
     .btn-ghost {
       padding: 4px 10px;
       font-size: 11.5px;
       font-family: 'Inter', sans-serif;
-      border: 1px solid var(--obs-border2);
+      border: 1px solid var(--brd2);
       border-radius: 4px;
       background: none;
       cursor: pointer;
-      color: var(--obs-muted);
-      transition: all 0.15s;
+      color: var(--mt);
+      transition: all .15s;
     }
 
     .btn-ghost:hover {
-      color: var(--obs-text);
-      border-color: var(--obs-border2);
-      background: var(--obs-surface3);
+      color: var(--tx);
+      background: var(--s3);
     }
 
     .btn-ghost.danger:hover {
-      color: var(--obs-red);
-      border-color: rgba(196, 106, 90, 0.3);
-      background: rgba(196, 106, 90, 0.08);
+      color: var(--rd);
+      border-color: rgba(196, 106, 90, .3);
+      background: rgba(196, 106, 90, .08);
     }
 
+    .btn-ghost.edit:hover {
+      color: var(--am);
+      border-color: rgba(212, 160, 48, .3);
+      background: rgba(212, 160, 48, .08);
+    }
+
+    /* ADD BUTTON */
     .add-btn {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       padding: 10px;
-      border: 1px dashed var(--obs-border2);
-      border-radius: var(--r-lg);
+      border: 1px dashed var(--brd2);
+      border-radius: var(--rl);
       background: none;
       cursor: pointer;
-      color: var(--obs-hint);
+      color: var(--ht);
       font-size: 12.5px;
       font-family: 'Inter', sans-serif;
       width: 100%;
       margin-top: 6px;
-      transition: all 0.15s;
+      transition: all .15s;
     }
 
     .add-btn:hover {
-      color: var(--obs-purple);
-      border-color: rgba(124, 107, 234, 0.3);
-      background: var(--obs-purple-glow);
+      color: var(--p);
+      border-color: rgba(124, 107, 234, .3);
+      background: var(--pg);
     }
 
+    /* FORM */
     .form-panel {
-      background: var(--obs-surface);
-      border: 1px solid var(--obs-border);
-      border-radius: var(--r-lg);
+      background: var(--s1);
+      border: 1px solid var(--brd);
+      border-radius: var(--rl);
       padding: 1.25rem;
       margin-top: 8px;
     }
@@ -354,47 +455,39 @@
       display: block;
       font-size: 11px;
       font-family: 'JetBrains Mono', monospace;
-      color: var(--obs-muted);
-      letter-spacing: 0.06em;
+      color: var(--mt);
+      letter-spacing: .06em;
       text-transform: uppercase;
       margin-bottom: 5px;
     }
 
     input[type=text],
+    input[type=number],
     textarea,
-    select {
+    select,
+    input[type=date] {
       width: 100%;
-      background: var(--obs-surface2);
-      border: 1px solid var(--obs-border);
+      background: var(--s2);
+      border: 1px solid var(--brd);
       border-radius: var(--r);
-      color: var(--obs-text);
+      color: var(--tx);
       font-family: 'Inter', sans-serif;
       font-size: 13px;
       padding: 8px 10px;
       outline: none;
-      transition: border-color 0.15s;
+      transition: border-color .15s;
     }
 
     input[type=text]:focus,
+    input[type=number]:focus,
     textarea:focus,
-    select:focus {
-      border-color: var(--obs-purple);
-    }
-
-    input[type=date] {
-      width: 100%;
-      background: var(--obs-surface2);
-      border: 1px solid var(--obs-border);
-      border-radius: var(--r);
-      color: var(--obs-text);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      padding: 8px 10px;
-      outline: none;
+    select:focus,
+    input[type=date]:focus {
+      border-color: var(--p);
     }
 
     textarea {
-      height: 70px;
+      height: 60px;
       resize: vertical;
     }
 
@@ -403,23 +496,8 @@
       cursor: pointer;
     }
 
-    input[type=range] {
-      -webkit-appearance: none;
-      width: 100%;
-      height: 4px;
-      background: var(--obs-surface3);
-      border-radius: 2px;
-      outline: none;
-      cursor: pointer;
-    }
-
-    input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--obs-purple);
-      border: 2px solid var(--obs-bg);
+    input[type=number] {
+      font-family: 'JetBrains Mono', monospace;
     }
 
     .form-grid {
@@ -428,22 +506,23 @@
       gap: 10px;
     }
 
-    .range-row {
-      display: flex;
-      align-items: center;
+    .form-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 10px;
+      margin-bottom: 12px;
     }
 
-    .range-val {
+    .metrics-hint {
+      font-size: 11px;
+      color: var(--ht);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--obs-purple);
-      min-width: 32px;
+      margin-top: 4px;
     }
 
     .btn-primary {
-      background: var(--obs-purple);
-      color: white;
+      background: var(--p);
+      color: #fff;
       border: none;
       padding: 8px 18px;
       border-radius: var(--r);
@@ -451,17 +530,17 @@
       font-family: 'Inter', sans-serif;
       font-weight: 500;
       cursor: pointer;
-      transition: opacity 0.15s;
+      transition: opacity .15s;
     }
 
     .btn-primary:hover {
-      opacity: 0.85;
+      opacity: .85;
     }
 
     .btn-cancel {
       background: none;
-      border: 1px solid var(--obs-border2);
-      color: var(--obs-muted);
+      border: 1px solid var(--brd2);
+      color: var(--mt);
       padding: 8px 18px;
       border-radius: var(--r);
       font-size: 13px;
@@ -469,12 +548,29 @@
       cursor: pointer;
     }
 
-    .empty {
-      text-align: center;
-      padding: 2.5rem 1rem;
-      color: var(--obs-hint);
-      font-size: 13px;
+    .formula-preview {
+      background: var(--s2);
+      border: 1px solid var(--brd);
+      border-radius: var(--r);
+      padding: 8px 12px;
       font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--p);
+      margin-top: 8px;
+    }
+
+    /* FOCUS */
+    .affirmation {
+      background: var(--s1);
+      border: 1px solid var(--brd);
+      border-left: 3px solid var(--p);
+      border-radius: 0 var(--r) var(--r) 0;
+      padding: 12px 16px;
+      margin-bottom: 1.5rem;
+      font-size: 13px;
+      color: var(--mt);
+      line-height: 1.6;
+      font-style: italic;
     }
 
     .focus-wrap {
@@ -484,25 +580,11 @@
       padding: 1rem 0 2rem;
     }
 
-    .affirmation {
-      background: var(--obs-surface);
-      border: 1px solid var(--obs-border);
-      border-left: 3px solid var(--obs-purple);
-      border-radius: 0 var(--r) var(--r) 0;
-      padding: 12px 16px;
-      margin-bottom: 1.5rem;
-      font-size: 13px;
-      color: var(--obs-muted);
-      line-height: 1.6;
-      text-align: left;
-      font-style: italic;
-    }
-
     .focus-label {
       font-size: 11px;
       font-family: 'JetBrains Mono', monospace;
-      color: var(--obs-hint);
-      letter-spacing: 0.1em;
+      color: var(--ht);
+      letter-spacing: .1em;
       text-transform: uppercase;
       margin-bottom: 6px;
     }
@@ -510,14 +592,14 @@
     .focus-goal-name {
       font-size: 18px;
       font-weight: 500;
-      color: var(--obs-text);
+      color: var(--tx);
       margin-bottom: 4px;
       line-height: 1.3;
     }
 
     .focus-goal-desc {
       font-size: 13px;
-      color: var(--obs-muted);
+      color: var(--mt);
       margin-bottom: 2rem;
     }
 
@@ -525,14 +607,14 @@
       font-size: 64px;
       font-weight: 300;
       font-family: 'JetBrains Mono', monospace;
-      color: var(--obs-text);
+      color: var(--tx);
       letter-spacing: -3px;
       margin-bottom: 1.5rem;
       line-height: 1;
     }
 
     .timer-display.running {
-      color: var(--obs-purple);
+      color: var(--p);
     }
 
     .timer-btns {
@@ -546,34 +628,31 @@
       padding: 8px 20px;
       font-size: 12.5px;
       font-family: 'JetBrains Mono', monospace;
-      border: 1px solid var(--obs-border2);
+      border: 1px solid var(--brd2);
       border-radius: var(--r);
-      background: var(--obs-surface);
+      background: var(--s1);
       cursor: pointer;
-      color: var(--obs-text);
-      transition: all 0.15s;
-      letter-spacing: 0.04em;
+      color: var(--tx);
+      transition: all .15s;
+      letter-spacing: .04em;
     }
 
     .btn-timer:hover {
-      border-color: var(--obs-purple);
-      color: var(--obs-purple);
+      border-color: var(--p);
+      color: var(--p);
     }
 
     .btn-timer.start {
-      background: var(--obs-purple);
-      border-color: var(--obs-purple);
-      color: white;
+      background: var(--p);
+      border-color: var(--p);
+      color: #fff;
     }
 
     .btn-timer.start:hover {
-      opacity: 0.85;
+      opacity: .85;
     }
 
-    .focus-select-wrap {
-      text-align: left;
-    }
-
+    /* LOG */
     .log-list {
       display: flex;
       flex-direction: column;
@@ -583,7 +662,7 @@
       display: flex;
       gap: 12px;
       padding: 10px 0;
-      border-bottom: 1px solid var(--obs-border);
+      border-bottom: 1px solid var(--brd);
       align-items: flex-start;
     }
 
@@ -597,197 +676,89 @@
 
     .log-text {
       font-size: 13px;
-      color: var(--obs-text);
+      color: var(--tx);
       margin-bottom: 2px;
     }
 
     .log-time {
       font-size: 11px;
       font-family: 'JetBrains Mono', monospace;
-      color: var(--obs-hint);
+      color: var(--ht);
     }
 
-    .course-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    .empty {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--ht);
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
     }
 
-    .course-item {
-      background: var(--obs-surface);
-      border: 1px solid var(--obs-border);
-      border-radius: var(--r-lg);
-      overflow: hidden;
-      transition: border-color 0.15s;
-    }
-
-    .course-item.done {
-      border-color: rgba(76, 175, 135, 0.25);
-    }
-
-    .course-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 13px 16px;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-
-    .course-header:hover {
-      background: var(--obs-surface2);
-    }
-
-    .course-num {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 1px solid var(--obs-border2);
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .7);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--obs-muted);
-      flex-shrink: 0;
+      z-index: 100;
+      backdrop-filter: blur(2px);
     }
 
-    .done .course-num {
-      background: rgba(76, 175, 135, 0.15);
-      border-color: rgba(76, 175, 135, 0.3);
-      color: var(--obs-green);
+    .modal-box {
+      background: var(--s1);
+      border: 1px solid var(--brd2);
+      border-radius: var(--rl);
+      padding: 1.5rem;
+      width: 90%;
+      max-width: 480px;
+      max-height: 80vh;
+      overflow-y: auto;
     }
 
-    .course-title-text {
-      font-size: 13.5px;
-      color: var(--obs-text);
-      flex: 1;
-    }
-
-    .course-dur {
-      font-size: 11px;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--obs-hint);
-    }
-
-    .course-body {
-      display: none;
-      padding: 0 16px 16px;
-      font-size: 13px;
-      color: var(--obs-muted);
-      line-height: 1.7;
-      border-top: 1px solid var(--obs-border);
-      padding-top: 14px;
-    }
-
-    .course-body.open {
-      display: block;
-    }
-
-    .code-block {
-      background: var(--obs-surface2);
-      border: 1px solid var(--obs-border);
-      border-radius: var(--r);
-      padding: 10px 14px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--obs-purple);
-      margin: 10px 0;
-      overflow-x: auto;
-      line-height: 1.6;
-    }
-
-    .mark-done-btn {
-      margin-top: 12px;
-    }
-
-    .section-header {
-      font-size: 11px;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--obs-hint);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+    .modal-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--tx);
+      margin-bottom: 1.25rem;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .section-header::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--obs-border);
+    .modal-title span {
+      color: var(--p);
     }
   </style>
 </head>
 
 <body>
-
   <div class="app">
     <div class="topbar">
       <div class="logo">
-        <svg class="logo-gem" viewBox="0 0 20 20" fill="none">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
           <path d="M10 2L3 7.5L5 16h10l2-8.5L10 2z" fill="rgba(124,107,234,0.3)" stroke="#7c6bea" stroke-width="1" />
           <path d="M10 2L3 7.5h14L10 2z" fill="#7c6bea" opacity="0.6" />
         </svg>
         <span class="logo-name">Goal Vault</span>
       </div>
       <div class="tabs">
-        <button class="tab active" onclick="switchTab('goals')"><span class="tab-icon">◈</span> Цели</button>
-        <button class="tab" onclick="switchTab('focus')"><span class="tab-icon">◎</span> Фокус</button>
-        <button class="tab" onclick="switchTab('log')"><span class="tab-icon">≡</span> Журнал</button>
-        <!-- <button class="tab" onclick="switchTab('course')"><span class="tab-icon">◇</span> Курс</button> -->
+        <button class="tab active" onclick="switchTab('goals')">◈ Цели</button>
+        <button class="tab" onclick="switchTab('focus')">◎ Фокус</button>
+        <button class="tab" onclick="switchTab('log')">≡ Журнал</button>
       </div>
     </div>
 
+    <!-- ЦЕЛИ -->
     <div id="panel-goals" class="panel active">
       <div class="stats-grid" id="stats"></div>
-      <div class="section-header">активные цели</div>
+      <div class="sec-hdr">активные цели</div>
       <div class="goals-list" id="goals-list"></div>
-      <button class="add-btn" onclick="toggleForm()">+ новая цель</button>
-      <div id="add-form" style="display:none; margin-top:10px;">
-        <div class="form-panel">
-          <div class="form-section">
-            <label class="form-label">Название</label>
-            <input id="f-title" type="text" placeholder="Запустить MVP за 30 дней">
-          </div>
-          <div class="form-section">
-            <label class="form-label">Описание</label>
-            <textarea id="f-desc" placeholder="Почему эта цель важна..."></textarea>
-          </div>
-          <div class="form-grid" style="margin-bottom:12px;">
-            <div>
-              <label class="form-label">Категория</label>
-              <select id="f-cat">
-                <option value="work">💼 Работа</option>
-                <option value="health">💪 Здоровье</option>
-                <option value="learn">📚 Обучение</option>
-                <option value="finance">💰 Финансы</option>
-                <option value="personal">🌟 Личное</option>
-              </select>
-            </div>
-            <div>
-              <label class="form-label">Дедлайн</label>
-              <input id="f-deadline" type="date">
-            </div>
-          </div>
-          <div class="form-section">
-            <label class="form-label">Прогресс</label>
-            <div class="range-row">
-              <input type="range" id="f-pct" min="0" max="100" value="0" step="1"
-                oninput="document.getElementById('f-pct-out').textContent=this.value+'%'">
-              <span class="range-val" id="f-pct-out">0%</span>
-            </div>
-          </div>
-          <div style="display:flex;gap:8px;margin-top:4px;">
-            <button class="btn-primary" onclick="saveGoal()">Сохранить</button>
-            <button class="btn-cancel" onclick="toggleForm()">Отмена</button>
-          </div>
-        </div>
-      </div>
+      <button class="add-btn" onclick="openForm()">+ новая цель</button>
     </div>
 
+    <!-- ФОКУС -->
     <div id="panel-focus" class="panel">
       <div id="affirmation-box" class="affirmation"></div>
       <div class="focus-wrap">
@@ -800,21 +771,78 @@
           <button class="btn-timer" onclick="pauseTimer()">⏸ пауза</button>
           <button class="btn-timer" onclick="resetTimer()">↺ сброс</button>
         </div>
-        <div class="focus-select-wrap">
+        <div style="text-align:left;">
           <label class="form-label">цель для фокуса</label>
           <select id="focus-select" onchange="setFocusGoal()" style="margin-top:5px;"></select>
         </div>
       </div>
     </div>
 
+    <!-- ЖУРНАЛ -->
     <div id="panel-log" class="panel">
-      <div class="section-header">история действий</div>
+      <div class="sec-hdr">история действий</div>
       <div id="log-list" class="log-list"></div>
     </div>
+  </div>
 
-    <div id="panel-course" class="panel">
-      <div class="section-header">курс по localStorage</div>
-      <div id="course-list" class="course-list"></div>
+  <!-- МОДАЛЬНОЕ ОКНО: ДОБАВИТЬ / РЕДАКТИРОВАТЬ -->
+  <div id="modal" class="modal-overlay" style="display:none;" onclick="closeModalOutside(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-title">◈ <span id="modal-title-text">Новая цель</span></div>
+
+      <div class="form-section">
+        <label class="form-label">Название цели</label>
+        <input id="f-title" type="text" placeholder="Например: Запустить MVP за 30 дней">
+      </div>
+      <div class="form-section">
+        <label class="form-label">Описание / Зачем это важно</label>
+        <textarea id="f-desc" placeholder="Почему эта цель важна для меня..."></textarea>
+      </div>
+      <div class="form-grid" style="margin-bottom:12px;">
+        <div>
+          <label class="form-label">Категория</label>
+          <select id="f-cat">
+            <option value="work">💼 Работа</option>
+            <option value="health">💪 Здоровье</option>
+            <option value="learn">📚 Обучение</option>
+            <option value="finance">💰 Финансы</option>
+            <option value="personal">🌟 Личное</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Дедлайн</label>
+          <input id="f-deadline" type="date">
+        </div>
+      </div>
+
+      <div class="sec-hdr" style="margin-bottom:8px;">измерение прогресса</div>
+      <div class="form-grid-4">
+        <div>
+          <label class="form-label">Показатель</label>
+          <input id="f-metric" type="text" placeholder="км, кг, $...">
+          <div class="metrics-hint">В чём измеряешь</div>
+        </div>
+        <div>
+          <label class="form-label">Результат</label>
+          <input id="f-target" type="number" min="0" placeholder="100">
+          <div class="metrics-hint">Цель = 100%</div>
+        </div>
+        <div>
+          <label class="form-label">Выполнил</label>
+          <input id="f-done" type="number" min="0" placeholder="0">
+          <div class="metrics-hint">Текущий факт</div>
+        </div>
+        <div>
+          <label class="form-label">%</label>
+          <div class="formula-preview" id="f-pct-preview">0%</div>
+          <div class="metrics-hint">Авто</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-top:4px;">
+        <button class="btn-primary" onclick="saveGoal()">Сохранить</button>
+        <button class="btn-cancel" onclick="closeModal()">Отмена</button>
+      </div>
     </div>
   </div>
 
@@ -823,36 +851,31 @@
     const CAT_COLORS = { work: '#7c6bea', health: '#4caf87', learn: '#9575cd', finance: '#d4a030', personal: '#4db6ac' };
     const AFFIRMATIONS = [
       '"Каждый шаг вперёд — это победа. Ты уже начал двигаться."',
-      '"Фокус на прогрессе, не на совершенстве. Прогресс важнее."',
+      '"Фокус на прогрессе, не на совершенстве."',
       '"Твои цели реальны. Запиши, действуй, повторяй."',
       '"Сегодня ты ближе к своей цели, чем вчера."',
       '"Маленькие действия каждый день создают большие результаты."'
     ];
 
-    let goals = JSON.parse(localStorage.getItem('goals_v2') || '[]');
-    let logs = JSON.parse(localStorage.getItem('logs_v2') || '[]');
-    let courseProgress = JSON.parse(localStorage.getItem('course_v2') || '{}');
+    let goals = JSON.parse(localStorage.getItem('gv_goals') || '[]');
+    let logs = JSON.parse(localStorage.getItem('gv_logs') || '[]');
+    let editingId = null;
     let timerSecs = 25 * 60, timerRunning = false, timerInterval = null;
 
+    function calcPct(target, done) {
+      if (!target || target == 0) return 0;
+      return Math.min(100, Math.round((done / target) * 100));
+    }
+
     function save() {
-      localStorage.setItem('goals_v2', JSON.stringify(goals));
-      localStorage.setItem('logs_v2', JSON.stringify(logs));
-      localStorage.setItem('course_v2', JSON.stringify(courseProgress));
+      localStorage.setItem('gv_goals', JSON.stringify(goals));
+      localStorage.setItem('gv_logs', JSON.stringify(logs));
     }
 
     function addLog(text, color) {
       logs.unshift({ text, color: color || '#7c6bea', time: new Date().toLocaleString('ru') });
       if (logs.length > 60) logs.pop();
       save();
-    }
-
-    function renderStats() {
-      const done = goals.filter(g => g.pct >= 100).length;
-      const avg = goals.length ? Math.round(goals.reduce((s, g) => s + g.pct, 0) / goals.length) : 0;
-      document.getElementById('stats').innerHTML = `
-    <div class="stat-card"><div class="stat-label">Всего</div><div class="stat-value">${goals.length}</div></div>
-    <div class="stat-card"><div class="stat-label">Готово</div><div class="stat-value">${done}</div></div>
-    <div class="stat-card"><div class="stat-label">Прогресс</div><div class="stat-value">${avg}%</div></div>`;
     }
 
     function getProgressColor(pct) {
@@ -862,14 +885,25 @@
       return '#8b8a96';
     }
 
+    function renderStats() {
+      const done = goals.filter(g => calcPct(g.target, g.done) >= 100).length;
+      const avg = goals.length ? Math.round(goals.reduce((s, g) => s + calcPct(g.target, g.done), 0) / goals.length) : 0;
+      document.getElementById('stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Всего</div><div class="stat-value">${goals.length}</div></div>
+    <div class="stat-card"><div class="stat-label">Готово</div><div class="stat-value">${done}</div></div>
+    <div class="stat-card"><div class="stat-label">Прогресс</div><div class="stat-value">${avg}%</div></div>`;
+    }
+
     function renderGoals() {
       renderStats();
       const el = document.getElementById('goals-list');
       if (!goals.length) { el.innerHTML = '<div class="empty">// нет целей — добавь первую</div>'; return; }
-      el.innerHTML = goals.map((g, i) => `
-    <div class="goal-card">
+      el.innerHTML = goals.map((g, i) => {
+        const pct = calcPct(g.target, g.done);
+        const col = CAT_COLORS[g.cat] || '#7c6bea';
+        return `<div class="goal-card" id="gc-${g.id}">
       <div class="goal-top">
-        <div class="goal-icon" style="background:${CAT_COLORS[g.cat]}22;border-color:${CAT_COLORS[g.cat]}33">${EMOJIS[g.cat] || '🎯'}</div>
+        <div class="goal-icon" style="background:${col}22;border-color:${col}33">${EMOJIS[g.cat] || '🎯'}</div>
         <div class="goal-body">
           <div class="goal-title">${g.title}</div>
           ${g.desc ? `<div class="goal-desc">${g.desc}</div>` : ''}
@@ -877,70 +911,141 @@
       </div>
       <div class="goal-tags">
         <span class="tag">#${g.cat}</span>
+        ${g.metric ? `<span class="tag-date">${g.metric}</span>` : ''}
         ${g.deadline ? `<span class="tag-date">→ ${g.deadline}</span>` : ''}
       </div>
+      <div class="metrics-row">
+        <div class="metric-box">
+          <div class="metric-label">Показатель</div>
+          <div class="metric-val">${g.metric || '—'}</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">Результат</div>
+          <div class="metric-val">${g.target ?? '—'}</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">Выполнил</div>
+          <div class="metric-val">${g.done ?? 0}</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">%</div>
+          <div class="metric-val pct-val">${pct}%</div>
+        </div>
+      </div>
       <div class="progress-row">
-        <div class="progress-track"><div class="progress-fill" style="width:${g.pct}%;background:${getProgressColor(g.pct)}"></div></div>
-        <div class="progress-pct">${g.pct}%</div>
+        <div class="progress-track"><div class="progress-fill" style="width:${pct}%;background:${getProgressColor(pct)}"></div></div>
+        <div class="progress-pct">${pct}%</div>
+      </div>
+      <div class="done-input-row">
+        <span class="done-label">Обновить «Выполнил»:</span>
+        <input class="done-input" type="number" min="0" id="dinput-${g.id}" value="${g.done ?? 0}" placeholder="0">
+        <button class="btn-apply" onclick="applyDone(${g.id})">Применить</button>
       </div>
       <div class="goal-footer">
-        <button class="btn-ghost" onclick="updatePct(${i})">↑ обновить</button>
-        <button class="btn-ghost danger" onclick="deleteGoal(${i})">✕ удалить</button>
+        <button class="btn-ghost edit" onclick="openEdit(${g.id})">✎ изменить</button>
+        <button class="btn-ghost danger" onclick="deleteGoal(${g.id})">✕ удалить</button>
       </div>
-    </div>`).join('');
+    </div>`;
+      }).join('');
     }
 
-    function toggleForm() {
-      const f = document.getElementById('add-form');
-      if (f.style.display === 'none') {
-        f.style.display = 'block';
-        document.getElementById('f-title').value = '';
-        document.getElementById('f-desc').value = '';
-        document.getElementById('f-cat').value = 'work';
-        document.getElementById('f-deadline').value = '';
-        document.getElementById('f-pct').value = 0;
-        document.getElementById('f-pct-out').textContent = '0%';
-      } else { f.style.display = 'none'; }
-    }
-
-    function saveGoal() {
-      const title = document.getElementById('f-title').value.trim();
-      if (!title) return;
-      goals.push({
-        id: Date.now(), title, desc: document.getElementById('f-desc').value.trim(),
-        cat: document.getElementById('f-cat').value, deadline: document.getElementById('f-deadline').value,
-        pct: parseInt(document.getElementById('f-pct').value)
-      });
-      addLog('Добавлена цель: ' + title, '#4caf87');
-      save(); document.getElementById('add-form').style.display = 'none';
-      renderGoals(); renderFocus();
-    }
-
-    function deleteGoal(i) {
-      addLog('Удалена цель: ' + goals[i].title, '#c46a5a');
-      goals.splice(i, 1); save(); renderGoals(); renderFocus();
-    }
-
-    function updatePct(i) {
-      const v = prompt(`Прогресс "${goals[i].title}" (0–100):`, goals[i].pct);
-      if (v === null) return;
-      goals[i].pct = Math.min(100, Math.max(0, parseInt(v) || 0));
-      addLog(`Прогресс "${goals[i].title}": ${goals[i].pct}%`, '#7c6bea');
+    function applyDone(id) {
+      const g = goals.find(x => x.id === id); if (!g) return;
+      const val = parseFloat(document.getElementById('dinput-' + id).value) || 0;
+      g.done = val;
+      const pct = calcPct(g.target, g.done);
+      addLog(`"${g.title}" → выполнено: ${val} ${g.metric || ''} (${pct}%)`, '#7c6bea');
       save(); renderGoals();
     }
 
+    function deleteGoal(id) {
+      const g = goals.find(x => x.id === id); if (!g) return;
+      addLog('Удалена цель: ' + g.title, '#c46a5a');
+      goals = goals.filter(x => x.id !== id);
+      save(); renderGoals(); renderFocus();
+    }
+
+    /* MODAL */
+    function openForm() {
+      editingId = null;
+      document.getElementById('modal-title-text').textContent = 'Новая цель';
+      document.getElementById('f-title').value = '';
+      document.getElementById('f-desc').value = '';
+      document.getElementById('f-cat').value = 'work';
+      document.getElementById('f-deadline').value = '';
+      document.getElementById('f-metric').value = '';
+      document.getElementById('f-target').value = '';
+      document.getElementById('f-done').value = '0';
+      document.getElementById('f-pct-preview').textContent = '0%';
+      document.getElementById('modal').style.display = 'flex';
+      setupFormulaPreview();
+    }
+
+    function openEdit(id) {
+      const g = goals.find(x => x.id === id); if (!g) return;
+      editingId = id;
+      document.getElementById('modal-title-text').textContent = 'Редактировать цель';
+      document.getElementById('f-title').value = g.title || '';
+      document.getElementById('f-desc').value = g.desc || '';
+      document.getElementById('f-cat').value = g.cat || 'work';
+      document.getElementById('f-deadline').value = g.deadline || '';
+      document.getElementById('f-metric').value = g.metric || '';
+      document.getElementById('f-target').value = g.target ?? '';
+      document.getElementById('f-done').value = g.done ?? 0;
+      const pct = calcPct(g.target, g.done);
+      document.getElementById('f-pct-preview').textContent = pct + '%';
+      document.getElementById('modal').style.display = 'flex';
+      setupFormulaPreview();
+    }
+
+    function setupFormulaPreview() {
+      const upd = () => {
+        const t = parseFloat(document.getElementById('f-target').value) || 0;
+        const d = parseFloat(document.getElementById('f-done').value) || 0;
+        document.getElementById('f-pct-preview').textContent = calcPct(t, d) + '%';
+      };
+      document.getElementById('f-target').oninput = upd;
+      document.getElementById('f-done').oninput = upd;
+    }
+
+    function closeModal() { document.getElementById('modal').style.display = 'none'; }
+    function closeModalOutside(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+
+    function saveGoal() {
+      const title = document.getElementById('f-title').value.trim();
+      if (!title) { alert('Введи название цели'); return; }
+      const target = parseFloat(document.getElementById('f-target').value) || 0;
+      const done = parseFloat(document.getElementById('f-done').value) || 0;
+      if (editingId) {
+        const g = goals.find(x => x.id === editingId);
+        if (g) {
+          g.title = title; g.desc = document.getElementById('f-desc').value.trim();
+          g.cat = document.getElementById('f-cat').value; g.deadline = document.getElementById('f-deadline').value;
+          g.metric = document.getElementById('f-metric').value.trim(); g.target = target; g.done = done;
+          addLog('Изменена цель: ' + title, '#d4a030');
+        }
+      } else {
+        goals.push({
+          id: Date.now(), title, desc: document.getElementById('f-desc').value.trim(),
+          cat: document.getElementById('f-cat').value, deadline: document.getElementById('f-deadline').value,
+          metric: document.getElementById('f-metric').value.trim(), target, done
+        });
+        addLog('Добавлена цель: ' + title, '#4caf87');
+      }
+      save(); closeModal(); renderGoals(); renderFocus();
+    }
+
+    /* FOCUS */
     function renderFocus() {
       const sel = document.getElementById('focus-select');
-      sel.innerHTML = goals.length
-        ? goals.map((g, i) => `<option value="${i}">${EMOJIS[g.cat]} ${g.title}</option>`).join('')
-        : '<option>— нет целей —</option>';
+      sel.innerHTML = goals.length ? goals.map(g => `<option value="${g.id}">${EMOJIS[g.cat]} ${g.title}</option>`).join('') : '<option>— нет целей —</option>';
       setFocusGoal();
       document.getElementById('affirmation-box').textContent = AFFIRMATIONS[Math.floor(Math.random() * AFFIRMATIONS.length)];
     }
 
     function setFocusGoal() {
-      const i = document.getElementById('focus-select').value;
-      const g = goals[i];
+      const id = parseInt(document.getElementById('focus-select').value);
+      const g = goals.find(x => x.id === id);
       document.getElementById('focus-goal-name').textContent = g ? g.title : 'Нет целей';
       document.getElementById('focus-goal-desc').textContent = g ? (g.desc || '') : '';
     }
@@ -951,8 +1056,7 @@
     }
 
     function startTimer() {
-      if (timerRunning) return;
-      timerRunning = true;
+      if (timerRunning) return; timerRunning = true;
       document.getElementById('timer-display').classList.add('running');
       timerInterval = setInterval(() => {
         timerSecs--;
@@ -960,7 +1064,8 @@
           clearInterval(timerInterval); timerRunning = false;
           document.getElementById('timer-display').classList.remove('running');
           timerSecs = 25 * 60;
-          const g = goals[document.getElementById('focus-select').value];
+          const id = parseInt(document.getElementById('focus-select').value);
+          const g = goals.find(x => x.id === id);
           if (g) addLog('Фокус-сессия: ' + g.title, '#7c6bea');
           renderLog(); alert('Сессия завершена! Сделай перерыв.');
         }
@@ -968,95 +1073,31 @@
       }, 1000);
     }
 
-    function pauseTimer() {
-      clearInterval(timerInterval); timerRunning = false;
-      document.getElementById('timer-display').classList.remove('running');
-    }
+    function pauseTimer() { clearInterval(timerInterval); timerRunning = false; document.getElementById('timer-display').classList.remove('running'); }
+    function resetTimer() { pauseTimer(); timerSecs = 25 * 60; updateTimerDisplay(); }
 
-    function resetTimer() {
-      pauseTimer(); timerSecs = 25 * 60; updateTimerDisplay();
-    }
-
+    /* LOG */
     function renderLog() {
       const el = document.getElementById('log-list');
       if (!logs.length) { el.innerHTML = '<div class="empty">// журнал пуст</div>'; return; }
-      el.innerHTML = logs.map(l => `
-    <div class="log-item">
-      <div class="log-dot" style="background:${l.color}"></div>
-      <div><div class="log-text">${l.text}</div><div class="log-time">${l.time}</div></div>
-    </div>`).join('');
+      el.innerHTML = logs.map(l => `<div class="log-item">
+    <div class="log-dot" style="background:${l.color}"></div>
+    <div><div class="log-text">${l.text}</div><div class="log-time">${l.time}</div></div>
+  </div>`).join('');
     }
 
-    const COURSE = [
-      {
-        id: 'c1', title: 'Что такое localStorage', dur: '5 мин',
-        body: `localStorage — встроенное хранилище браузера. Данные сохраняются между сессиями и не удаляются при закрытии.<br><br>
-   <div class="code-block">localStorage.setItem('key', 'value');<br>localStorage.getItem('key');<br>localStorage.removeItem('key');<br>localStorage.clear();</div>
-   Этот дашборд полностью работает на localStorage — все твои цели хранятся прямо в браузере.`},
-      {
-        id: 'c2', title: 'Хранение объектов через JSON', dur: '5 мин',
-        body: `localStorage хранит только строки. Объекты нужно сериализовать через JSON.<br><br>
-   <div class="code-block">const goals = [{title:'MVP', pct:30}];<br>localStorage.setItem('goals', JSON.stringify(goals));<br><br>const loaded = JSON.parse(localStorage.getItem('goals'));</div>
-   При загрузке страницы мы читаем этот массив и рендерим карточки.`},
-      {
-        id: 'c3', title: 'Архитектура MVP дашборда', dur: '10 мин',
-        body: `Три файла — полноценный продукт:<br><br>
-   <div class="code-block">index.html  → разметка<br>style.css   → Obsidian-тема<br>app.js      → логика + localStorage</div>
-   Паттерн:<br>
-   <div class="code-block">function save() { localStorage.setItem(...) }<br>function render() { /* обновить DOM */ }<br>function addGoal(data) {<br>  goals.push(data); save(); render();<br>}</div>`},
-      {
-        id: 'c4', title: 'Pomodoro таймер для фокуса', dur: '10 мин',
-        body: `25 минут работы, 5 минут отдыха. Привяжи таймер к конкретной цели.<br><br>
-   <div class="code-block">let secs = 25 * 60;<br>const t = setInterval(() => {<br>  secs--;<br>  display.textContent = format(secs);<br>  if (secs <= 0) { clearInterval(t); done(); }<br>}, 1000);</div>
-   Контекст цели + таймер = мощный фокус.`},
-      {
-        id: 'c5', title: 'Деплой за 5 минут', dur: '5 мин',
-        body: `Опубликуй дашборд бесплатно:<br><br>
-   <div class="code-block">1. Сохрани код → index.html<br>2. Открой netlify.com<br>3. Перетащи файл<br>4. Получи ссылку вида *.netlify.app</div>
-   localStorage работает у каждого пользователя в его браузере отдельно.`}
-    ];
-
-    function renderCourse() {
-      document.getElementById('course-list').innerHTML = COURSE.map((c, idx) => {
-        const done = courseProgress[c.id];
-        return `<div class="course-item ${done ? 'done' : ''}">
-      <div class="course-header" onclick="toggleCourse('${c.id}')">
-        <div class="course-num">${done ? '✓' : idx + 1}</div>
-        <div class="course-title-text">${c.title}</div>
-        <div class="course-dur">${c.dur}</div>
-      </div>
-      <div id="cb-${c.id}" class="course-body">
-        ${c.body}
-        <button class="btn-ghost mark-done-btn" onclick="markDone('${c.id}')">${done ? '✓ Изучено' : 'Отметить изученным'}</button>
-      </div>
-    </div>`;
-      }).join('');
-    }
-
-    function toggleCourse(id) {
-      document.getElementById('cb-' + id).classList.toggle('open');
-    }
-
-    function markDone(id) {
-      courseProgress[id] = true; save();
-      addLog('Урок изучен: ' + COURSE.find(c => c.id === id).title, '#4caf87');
-      renderCourse(); renderLog();
-    }
-
+    /* TABS */
     function switchTab(name) {
-      const names = ['goals', 'focus', 'log', 'course'];
-      document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', names[i] === name));
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-      document.getElementById('panel-' + name).classList.add('active');
+      ['goals', 'focus', 'log'].forEach(n => {
+        document.querySelectorAll('.tab')[['goals', 'focus', 'log'].indexOf(n)].classList.toggle('active', n === name);
+        document.getElementById('panel-' + n).classList.toggle('active', n === name);
+      });
       if (name === 'focus') renderFocus();
       if (name === 'log') renderLog();
-      if (name === 'course') renderCourse();
     }
 
     renderGoals();
-    renderCourse();
   </script>
-
 </body>
 
 </html>
